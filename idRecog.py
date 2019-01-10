@@ -5,24 +5,20 @@ from keras.layers import  Flatten
 from keras.layers import  Dense
 from keras.preprocessing.image import ImageDataGenerator
 
-# as first layer in a sequential model:
 classifier = Sequential()
-   # now the model will take as input arrays of shape (*, 16)
-    # and output arrays of shape (*, 32)
-# after the first layer, you don't need to specify
-    # the size of the input anymore:
-classifier.add(Convolution2D(32,3,3, input_shape=(64,64,3),activation="relu"))
+# First Layer
+classifier.add(Convolution2D(32,(3,3), input_shape=(64,64,3),activation="relu"))
 #Feature mapping
 classifier.add(MaxPooling2D(pool_size=(2,2)))
 #Second Layer Feature mapping
-classifier.add(Convolution2D(32,3,3,activation="relu"))
+classifier.add(Convolution2D(32,(3,3),activation="relu"))
 #Feature mapping
 classifier.add(MaxPooling2D(pool_size=(2,2)))
 #Convert to single array
 classifier.add(Flatten())
 
-classifier.add(Dense(output_dim =128, activation= 'relu'))
-classifier.add(Dense(output_dim =3, activation= 'softmax')) #softmax default
+classifier.add(Dense(activation= 'relu', units =128 ))
+classifier.add(Dense(activation= 'sigmoid', units =3)) #softmax default
 classifier.compile(optimizer="adam", loss = 'categorical_crossentropy', metrics= ["accuracy"])
 
 train_datagen = ImageDataGenerator(
@@ -53,4 +49,4 @@ classifier.fit_generator(
         validation_steps=7)
 
 
-classifier.save('idt.h5')
+classifier.save('ids.h5')
