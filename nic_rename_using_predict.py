@@ -4,6 +4,8 @@ from keras.preprocessing import image
 import random
 import os
 
+projectPath = '/home/lmadhuranga/PycharmProjects/crazyfox-identify-NIC-or-Not-using-tensorflow-keras-CNN'
+
 
 def get_filepaths(directory):
     file_paths = []
@@ -15,8 +17,9 @@ def get_filepaths(directory):
 
     return file_paths
 
+
 # !important full path
-full_file_paths = get_filepaths("/home/lmadhuranga/PycharmProjects/crazyfox-identify-NIC-or-Not-using-tensorflow-keras-CNN/suffle")
+full_file_paths = get_filepaths(projectPath+"/suffle")
 
 
 def preds():
@@ -26,31 +29,48 @@ def preds():
 
             testimage = image.img_to_array(testimage)
             testimage = np.expand_dims(testimage, 0)
-            # testimage  = testimage.astype('float64')
             testimage /= 255
-            model = load_model('trainedModles/nICTrainedModelVNic700.h5')
-            results = model.predict(testimage)
+            model = load_model(projectPath+ '/trainedModles/nICTrainedModelVNic700.h5')
             preds = model.predict_proba(testimage)
             pred_classes = np.argmax(preds)
-            print("pred class", pred_classes)
+            print("pred_classes", pred_classes)
             final_score = preds[0][0] + preds[0][1] + preds[0][2]
-            print("final score", final_score)
+            print("final_score", final_score)
 
         yield pred_classes, f
 
 
 preds()
+outPutFolder = '/output/'
+counterNicFront = 0
+counterNicBack = 0
+counterNicLicence = 0
+counterOther = 0
 
 for pred_classes, f in preds():
-    randomno = random.randint(1, 90000)._str_()
-    if (pred_classes == 0):
-        os.rename(f, '/home/lmadhuranga/PycharmProjects/crazyfox-identify-NIC-or-Not-using-tensorflow-keras-CNN/output' + f'{randomno}' + '.jpg')
+    randomno = random.randint(1, 90000)
+
+    if pred_classes == 0:
+        counterNicLicence += 1
+        os.rename(f, projectPath +outPutFolder + '/licence_front/licence_front_' + `counterNicLicence` + '.jpg')
         print("License_front")
-    elif (pred_classes == 1):
-        os.rename(f, '/home/lmadhuranga/PycharmProjects/crazyfox-identify-NIC-or-Not-using-tensorflow-keras-CNN/output' + f'{randomno}' + '.jpg')
+
+    elif pred_classes == 1:
+        counterNicBack += 1
+        os.rename(f, projectPath +outPutFolder + '/nic_back/nic_back_' + `counterNicBack` + '.jpg')
         print("NIC Back")
-    elif (pred_classes == 2):
-        os.rename(f, '/home/lmadhuranga/PycharmProjects/crazyfox-identify-NIC-or-Not-using-tensorflow-keras-CNN/output' + f'{randomno}' + '.jpg')
+
+    elif pred_classes == 2:
+        counterNicFront += 1
+        os.rename(f, projectPath + outPutFolder + '/nic_front/nic_front_' + `counterNicFront` + '.jpg')
         print("NIC Front")
 
-print('Process End')
+    else:
+        counterOther += 1
+
+print('---------------------- Summery --------------------')
+print('counterNicFront', counterNicFront)
+print('counterNicBack', counterNicBack)
+print('counterNicLicence', counterNicLicence)
+print('counterOther', counterOther)
+print('----------------------Process End--------------------')

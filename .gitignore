@@ -12,6 +12,7 @@
 .idea/*
 /trainedModles/*
 /suffle/*
+/output/*
 
 .pnp.js
 
