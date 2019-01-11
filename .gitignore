@@ -4,9 +4,15 @@
 /node_modules
 /.pnp
 /.idea/
+/.idea/*
 .idea/
 /.idea/*
+/.idea/workspace.xml
+.idea/workspace.xml
 .idea/*
+/trainedModles/*
+/suffle/*
+
 .pnp.js
 
 # testing
