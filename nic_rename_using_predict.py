@@ -4,7 +4,7 @@ from keras.preprocessing import image
 import random
 import os
 
-projectPath = '/home/lmadhuranga/PycharmProjects/crazyfox-identify-NIC-or-Not-using-tensorflow-keras-CNN'
+projectPath = 'C:\machine learning\identify-NIC-or-Not-using-tensorflow-keras-CNN'
 unSortedImageDir = projectPath + '/suffle'
 
 
@@ -59,28 +59,28 @@ for pred_classes, f, preds, final_score in preds():
     print("final_score", final_score)
     if(final_score>0.6):
         if pred_classes == 0:
-            # counterNicLicence += 1
-            # img_path = projectPath + '/output/licence_front/licence_front_' + `counterNicLicence` + '.jpg'
-            # os.rename(f, img_path)
-            # print('img_path', img_path)
-            print('file',f)
-            print("License_front")
+             counterNicLicence += 1
+             img_path = projectPath + '/output/licence_front/licence_front_' + repr(counterNicLicence) + '.jpg'
+             os.rename(f, img_path)
+             print('img_path', img_path)
+             print('file',f)
+             print("License_front")
 
         elif pred_classes == 1:
-            # counterNicBack += 1
-            # img_path = projectPath + '/output/nic_back/nic_back_' + `counterNicBack` + '.jpg'
-            # os.rename(f, img_path)
-            # print('img_path', img_path)
-            print('file',f)
-            print("NIC Back")
+              counterNicBack += 1
+              img_path = projectPath + '/output/nic_back/nic_back_' + repr(counterNicBack) + '.jpg'
+              os.rename(f, img_path)
+              print('img_path', img_path)
+              print('file',f)
+              print("NIC Back")
 
         elif pred_classes == 2:
-            # counterNicFront += 1
-            # img_path = projectPath + '/output/nic_front/nic_front_' + `counterNicFront` + '.jpg'
-            # os.rename(f, img_path)
-            # print('img_path', img_path)
-            print('file',f)
-            print("NIC Front")
+              counterNicFront += 1
+              img_path = projectPath + '/output/nic_front/nic_front_' + repr(counterNicFront) + '.jpg'
+              os.rename(f, img_path)
+              print('img_path', img_path)
+              print('file',f)
+              print("NIC Front")
 
         else:
             counterOther += 1
