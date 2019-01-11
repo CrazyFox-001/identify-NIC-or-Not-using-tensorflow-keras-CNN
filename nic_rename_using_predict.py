@@ -54,19 +54,23 @@ for pred_classes, f in preds():
 
     if pred_classes == 0:
         counterNicLicence += 1
-        os.rename(f, projectPath + '/output/licence_front/licence_front_' + `counterNicLicence` + '.jpg')
+        img_path = projectPath + '/output/licence_front/licence_front_' + `counterNicLicence` + '.jpg'
+        os.rename(f, img_path)
+        print('img_path', img_path)
         print("License_front")
 
     elif pred_classes == 1:
         counterNicBack += 1
-        print(projectPath + '/output/nic_back/nic_back_' + `counterNicBack` + '.jpg')
-        os.rename(f, projectPath + '/output/nic_back/nic_back_' + `counterNicBack` + '.jpg')
+        img_path = projectPath + '/output/nic_back/nic_back_' + `counterNicBack` + '.jpg'
+        os.rename(f, img_path)
+        print('img_path', img_path)
         print("NIC Back")
 
     elif pred_classes == 2:
         counterNicFront += 1
-        print(projectPath + '/output/nic_front/nic_front_' + `counterNicFront` + '.jpg')
-        os.rename(f, projectPath + '/output/nic_front/nic_front_' + `counterNicFront` + '.jpg')
+        img_path = projectPath + '/output/nic_front/nic_front_' + `counterNicFront` + '.jpg'
+        os.rename(f, img_path)
+        print('img_path', img_path)
         print("NIC Front")
 
     else:
