@@ -43,6 +43,7 @@ def preds():
 
 
 preds()
+outPutFolder = '/output/'
 counterNicFront = 0
 counterNicBack = 0
 counterNicLicence = 0
