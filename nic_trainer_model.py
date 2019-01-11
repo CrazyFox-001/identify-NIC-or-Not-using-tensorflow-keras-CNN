@@ -24,12 +24,18 @@ classifier.add(Convolution2D(32, (3, 3), activation="relu"))
 # Feature mapping second layer
 classifier.add(MaxPooling2D(pool_size=(2, 2)))
 
+classifier.add(Convolution2D(32, (3, 3), activation="relu"))
+classifier.add(MaxPooling2D(pool_size=(2, 2)))
+classifier.add(Convolution2D(32, (3, 3), activation="relu"))
+classifier.add(MaxPooling2D(pool_size=(2, 2)))
 # Convert multi-diamention array into single array
 classifier.add(Flatten())
 
 # Initialize the third layer
 classifier.add(Dense(activation= 'relu', units =128 ))
-
+classifier.add(Dense(activation= 'relu', units =128 ))
+classifier.add(Dense(activation= 'relu', units =128 ))
+classifier.add(Dense(activation= 'relu', units =128 ))
 # Initialize the fourth and last layer
 # Reason to use soft max 
         # more than 2 out put
